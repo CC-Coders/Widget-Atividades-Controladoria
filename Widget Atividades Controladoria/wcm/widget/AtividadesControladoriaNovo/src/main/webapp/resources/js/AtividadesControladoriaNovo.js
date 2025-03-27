@@ -5,6 +5,7 @@ var AtividadesControladoriaNovo = SuperWidget.extend({
         intervalAutoRefresh = null;
         LoadingCarregandoRelatorio = FLUIGC.loading('#divListaAtividades');
 
+        montaListaDeAnosNoFiltro();
         setMesEAnoParaAtual();
         ExecutaRelatorio();
         setIntevaloDeExecucaoDoRelatorio(intervalAutoRefresh);
@@ -27,6 +28,17 @@ var AtividadesControladoriaNovo = SuperWidget.extend({
     }
 });
 
+function montaListaDeAnosNoFiltro(){
+    const anoAtual = new Date().getFullYear();
+    const menorAno = 2018;
+    var html = "";
+
+    for (let ano = anoAtual; ano >= menorAno; ano--) {
+        html+=`<option value="${ano}">${ano}</option>`;
+    }
+
+    $("#AnoFiltro").html(html);
+}
 
 function setIntevaloDeExecucaoDoRelatorio(intervalAutoRefresh) {
     clearInterval(intervalAutoRefresh);
